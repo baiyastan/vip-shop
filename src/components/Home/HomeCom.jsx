@@ -6,6 +6,7 @@ function HomeCom() {
   return (
     <>
       <Banner />
+      <Banner />
     </>
   );
 }
