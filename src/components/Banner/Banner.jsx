@@ -15,14 +15,10 @@ function Banner() {
       const res = await apiClent.get("/categories");
 
       setCategory(res.data);
-
-      console.log(res);
     } catch (error) {
       console.log(error);
     }
   }
-
-  console.log(category);
 
   useEffect(() => {
     getCategory();

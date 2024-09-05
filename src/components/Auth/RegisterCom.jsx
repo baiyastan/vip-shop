@@ -2,14 +2,36 @@ import React, { useState } from "react";
 import phone from "../../assets/image/phoneImage.png";
 import "./Auth.scss";
 import { Link } from "react-router-dom";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../firebase";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 function RegisterCom() {
   const [user, setUser] = useState({ email: "", password: "" });
+  const navigate = useNavigate();
 
   function handler(event) {
     const { name, value } = event.target;
     setUser({ ...user, [name]: value });
   }
+
+  async function singUp() {
+    try {
+      const res = await createUserWithEmailAndPassword(
+        auth,
+        user.email,
+        user.password
+      );
+      setUser({ email: "", password: "" });
+      toast.success("email success created");
+      navigate("/login");
+    } catch (error) {
+      console.log(error);
+      toast.error(error.message);
+    }
+  }
+
   return (
     <div className="auth container">
       <img src={phone} alt="" />
@@ -37,7 +59,9 @@ function RegisterCom() {
             />
           </div>
           <div className="auth-btns">
-            <button className="create">Create Account</button>
+            <button onClick={() => singUp()} className="create">
+              Create Account
+            </button>
             <button className="google">Sign up with Google</button>
             <div className="auth-link">
               <p>Already have account?</p>

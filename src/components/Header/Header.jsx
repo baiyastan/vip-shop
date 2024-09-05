@@ -1,7 +1,16 @@
 import React from "react";
 import "./Header.scss";
+import heart from "../../assets/svg/heart.svg";
+import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 function Header() {
+  const { t, i18n } = useTranslation();
+
+  const handleChange = (event) => {
+    const lng = event.target.value;
+    i18n.changeLanguage(lng);
+  };
   return (
     <>
       <div className="top-header">
@@ -10,7 +19,7 @@ function Header() {
             Summer Sale For All Swim Suits And Free Express Delivery - OFF 50%!{" "}
             <a>ShopNow</a>
           </p>
-          <select name="" id="">
+          <select onChange={handleChange} name="" id="">
             <option value="kg">КР</option>
             <option value="en">ENG</option>
             <option value="ru">РУС</option>
@@ -19,9 +28,11 @@ function Header() {
       </div>
       <header className="header container">
         <div className="header-left">
-          <h1>Exclusive</h1>
+          <h1>{t("logo")}</h1>
           <ul>
-            <li>Home</li>
+            <li>
+              <Link to="/">{t("home")}</Link>
+            </li>
             <li>Contact</li>
             <li>About</li>
             <li>Sign up</li>
@@ -29,11 +40,13 @@ function Header() {
         </div>
         <div className="header-right">
           <div className="search">
-            <input type="text" />
+            <input type="text" placeholder={t("home")} />
             <img src="" alt="" />
           </div>
           <div className="right-icon">
-            <img src="" alt="" />
+            <Link to="/wishlist">
+              <img src={heart} alt="" />
+            </Link>
             <img src="" alt="" />
           </div>
         </div>
