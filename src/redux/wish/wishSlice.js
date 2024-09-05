@@ -5,8 +5,18 @@ const wishSlice = createSlice({
   initialState: {
     items: [],
   },
-  reducers: {},
+  reducers: {
+    addWish: (state, action) => {
+      const findProduct = state.items.find(
+        (x) => x.idDrink == action.payload.idDrink
+      );
+
+      if (!findProduct) {
+        state.items.push(action.payload);
+      }
+    },
+  },
 });
 
-export const {} = wishSlice.actions;
+export const { addWish } = wishSlice.actions;
 export default wishSlice.reducer;

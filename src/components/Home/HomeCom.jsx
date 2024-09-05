@@ -10,6 +10,9 @@ import {
   fetchProductError,
 } from "../../redux/product/productSlice";
 import Spinner from "../Spinner/Spinner";
+import axios from "axios";
+
+const API = "https://www.thecocktaildb.com/api/json/v1/1/search.php?f=a";
 
 function HomeCom() {
   const [product, setProduct] = useState([]);
@@ -20,10 +23,12 @@ function HomeCom() {
   async function getProducts() {
     distpach(fetchProductStart());
     try {
-      const res = await apiClent.get("/products");
+      const res = await axios.get(API);
+
+      console.log(res);
 
       setTimeout(() => {
-        distpach(fetchProductSuccess(res.data));
+        distpach(fetchProductSuccess(res.data.drinks));
       }, 1000);
     } catch (error) {
       console.log(error);
