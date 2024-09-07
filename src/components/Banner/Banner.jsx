@@ -27,7 +27,7 @@ function Banner() {
     <div className="banner container">
       <div className="banner-sidebar">
         <ul>
-          {category.map((item) => (
+          {category.slice(0, 8).map((item) => (
             <li key={item.id}>{item.name}</li>
           ))}
         </ul>

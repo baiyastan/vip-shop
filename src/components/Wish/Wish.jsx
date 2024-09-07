@@ -8,7 +8,7 @@ function Wish() {
   return (
     <div className="wish-product">
       {items?.map((item) => (
-        <Product key={item.idDrink} icon={true} data={item} />
+        <Product key={item.idDrink} data={item} icon={true} />
       ))}
     </div>
   );

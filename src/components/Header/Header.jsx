@@ -3,9 +3,12 @@ import "./Header.scss";
 import heart from "../../assets/svg/heart.svg";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
 
 function Header() {
   const { t, i18n } = useTranslation();
+
+  const { items } = useSelector((state) => state.wishlist);
 
   const handleChange = (event) => {
     const lng = event.target.value;
@@ -45,7 +48,10 @@ function Header() {
           </div>
           <div className="right-icon">
             <Link to="/wishlist">
-              <img src={heart} alt="" />
+              <div className="wish">
+                <img src={heart} alt="" />
+                <div className="count">{items.length}</div>
+              </div>
             </Link>
             <img src="" alt="" />
           </div>
